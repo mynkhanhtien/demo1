@@ -143,6 +143,12 @@ jobs:
         run: |
           cd new-branch
           ./gradlew clean build
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch/build/libs
+          ls -la
 
       - name: Rename JAR file
         run: |
