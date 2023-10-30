@@ -4,7 +4,6 @@ name: AWS example workflow
 on:
   push
 env:
-  BUCKET_NAME : "mq-my-static-bucket"
   AWS_REGION : "us-east-1"
 # permission can be added at job level or workflow level    
 permissions:
@@ -62,10 +61,10 @@ jobs:
       - name: Set environment variable from app.properties
         run: |
           AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
-          echo "AWS_BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
+          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
       - name: Use AWS_BUCKET_NAME
         run: |
-          echo "The AWS bucket name is $BUCKET_NAME"
+          echo "The AWS bucket name is $AWS_BUCKET_NAME"
           # Use the AWS_BUCKET_NAME environment variable in your commands or scripts
       - name: Extract properties from app.properties
         id: extract-properties
@@ -85,10 +84,10 @@ jobs:
           for jar_file in *.jar; do
             if [[ $jar_file != *"original"* ]]; then
               new_name="${{ steps.extract-properties.outputs.jar_file_name }}"
-              mv "$$jar_file" "$new_name"
+              mv "$jar_file" "$new_name"
             fi
           done
       # Upload a file to AWS s3
       - name:  Copy index.html to s3
         run: |
-          aws s3 cp ./README.md s3://${{ env.BUCKET_NAME }}/
+          aws s3 cp ./README.md s3://$AWS_BUCKET_NAME/
