@@ -56,17 +56,28 @@ jobs:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
+      - name: Read app.properties
+        run: |
+          cat src/main/resources/app.properties
+      - name: Set environment variable from app.properties
+        run: |
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
+          echo "AWS_BUCKET_NAME=$BUCKET_NAME" >> $GITHUB_ENV
+      - name: Use AWS_BUCKET_NAME
+        run: |
+          echo "The AWS bucket name is $BUCKET_NAME"
+          # Use the AWS_BUCKET_NAME environment variable in your commands or scripts
       - name: Extract properties from app.properties
         id: extract-properties
         run: |
           AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
-#          AWS_REGION=$(grep -Po '(?<=^region=).+' src/main/resources/app.properties)
-#          JAR_FILE_NAME=$(grep -Po '(?<=^jar_file_name=).+' src/main/resources/app.properties)
-#          FLINK_APP_NAME=$(grep -Po '(?<=^flink_app_name=).+' src/main/resources/app.properties)
+          AWS_REGION=$(grep -Po '(?<=^region=).+' src/main/resources/app.properties)
+          JAR_FILE_NAME=$(grep -Po '(?<=^jar_file_name=).+' src/main/resources/app.properties)
+          FLINK_APP_NAME=$(grep -Po '(?<=^flink_app_name=).+' src/main/resources/app.properties)
           echo "::set-output name=bucket::$AWS_BUCKET_NAME"
-#          echo "::set-output name=region::$AWS_REGION"
-#          echo "::set-output name=jar_file_name::$JAR_FILE_NAME"
-#          echo "::set-output name=flink_app_name::$FLINK_APP_NAME"
+          echo "::set-output name=region::$AWS_REGION"
+          echo "::set-output name=jar_file_name::$JAR_FILE_NAME"
+          echo "::set-output name=flink_app_name::$FLINK_APP_NAME"
 
       - name: Rename JAR file
         run: |
