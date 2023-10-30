@@ -18,7 +18,7 @@ jobs:
           # Extract the comment body
           COMMENT_BODY=$(jq -r .comment.body "${{ github.event_path }}")
           
-          # Check if the comment matches the required formats
+          # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
           if [[ $COMMENT_BODY =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
             SOURCE_NAME="${BASH_REMATCH[2]}"
             CLIENT_NAME="${BASH_REMATCH[3]}"
