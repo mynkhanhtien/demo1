@@ -60,7 +60,7 @@ jobs:
           cat src/main/resources/app.properties
       - name: Set environment variable from app.properties
         run: |
-          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
           echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
       - name: Use AWS_BUCKET_NAME
         run: |
