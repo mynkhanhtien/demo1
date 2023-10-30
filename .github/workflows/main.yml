@@ -153,6 +153,12 @@ jobs:
               mv "$jar_file" "$new_name"
             fi
           done
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch/build/libs
+          ls -la
 
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
