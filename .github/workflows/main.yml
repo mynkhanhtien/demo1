@@ -32,9 +32,6 @@ jobs:
           PR_TITLE=$(jq -r .pull_request.title "${{ github.event_path }}")
           echo "PR_TITLE=PR_TITLE" >> $GITHUB_ENV
           echo "The PR_TITLE name is $PR_TITLE"
-          COMMENT_BODY=$(jq -r .comment.body "${{ github.event_path }}")
-          echo "COMMENT_BODY=COMMENT_BODY" >> $GITHUB_ENV
-          echo "The COMMENT_BODY name is $COMMENT_BODY"
           
           # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
           if [[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
@@ -46,11 +43,15 @@ jobs:
             echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
             echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
             echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+            echo "The PR_TITLE name is $SOURCE_NAME"
+            echo "The PR_TITLE name is $CLIENT_NAME"
+            echo "The PR_TITLE name is $PROGRAM_NAME"
           
             # Add your job steps here
             - name: Run Your Job
               run: |
                 echo "Running your job based on the comment format."
+          
             - name: Checkout Repository
               uses: actions/checkout@v3
       
