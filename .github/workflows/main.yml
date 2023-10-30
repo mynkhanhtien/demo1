@@ -2,7 +2,20 @@
 # The workflow Creates static website using aws s3
 name: AWS example workflow
 on:
-  push
+  push:
+    branches:
+      - develop
+      - main
+      - master
+    paths:
+      - 'src/**/*'
+      - '.github/**/*'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - develop
+      - main
+      - master
 # permission can be added at job level or workflow level    
 permissions:
   id-token: write   # This is required for requesting the JWT
