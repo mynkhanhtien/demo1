@@ -156,7 +156,7 @@ jobs:
           for jar_file in *.jar; do
             if [[ $jar_file != *"original"* ]]; then
               new_name=$JAR_NAME
-              mv "$jar_file" "$new_name"
+              mv "$jar_file" "$new_name.jar"
             fi
           done
       - name: Display current directory src
