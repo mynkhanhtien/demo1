@@ -140,7 +140,9 @@ jobs:
         run: chmod +x new-branch/gradlew
 
       - name: Build with Gradle
-        run: ./new-branch/gradlew clean build
+        run: |
+          cd new-branch
+          ./gradlew clean build
 
       - name: Rename JAR file
         run: |
