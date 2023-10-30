@@ -34,7 +34,7 @@ jobs:
           PR_TITLE=$(jq -r .pull_request.title "${{ github.event_path }}")
           echo "PR_TITLE=PR_TITLE" >> $GITHUB_ENV
           echo "The PR_TITLE name is $PR_TITLE"
-          
+
           # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
           if ! [[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
             echo "The comment does not match the required format. Skipping the job."
@@ -43,7 +43,7 @@ jobs:
             SOURCE_NAME="${BASH_REMATCH[2]}"
             CLIENT_NAME="${BASH_REMATCH[3]}"
             PROGRAM_NAME="${BASH_REMATCH[4]}"
-          
+
             echo "The comment matches the required format."
             echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
             echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
@@ -65,6 +65,30 @@ jobs:
           cd data-migration
           ls -la
 
+      - name: Read app.properties
+        run: |
+          cat resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties
+      - name: Set environment variable from app.properties
+        run: |
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' new-branch/src/main/resources/app.properties)
+          AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' new-branch/src/main/resources/app.properties)
+          AWS_REGION=$(grep -Po '(?<=^aws.region=).+' new-branch/src/main/resources/app.properties)
+          JAR_NAME=$(grep -Po '(?<=^jar.name=).+' new-branch/src/main/resources/app.properties)
+#          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' new-branch/src/main/resources/app.properties)
+#          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' new-branch/src/main/resources/app.properties)
+#          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' new-branch/src/main/resources/app.properties)
+          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
+          echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
+          echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
+          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+#          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+#          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+#          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+          echo "The AWS bucket name is $AWS_BUCKET_NAME"
+          echo "The AWS path folder name is $AWS_PATH_FOLDER"
+          echo "The AWS region name is $AWS_REGION"
+          echo "The jar file name is $JAR_NAME"
+
       - name: Checkout source code
         uses: actions/checkout@v3
         with:
@@ -85,7 +109,7 @@ jobs:
 
       - name: Copy app.properties from config to src
         run: |
-          sudo cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
+          cp -f resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
 
       - name: Display current directory src
         run: |
@@ -93,27 +117,6 @@ jobs:
           ls -la
           cd new-branch
           ls -la
-
-      - name: Read app.properties
-        run: |
-          cat new-branch/src/main/resources/app.properties
-      - name: Set environment variable from app.properties
-        run: |
-          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' new-branch/src/main/resources/app.properties)
-          AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' new-branch/src/main/resources/app.properties)
-          AWS_REGION=$(grep -Po '(?<=^aws.region=).+' new-branch/src/main/resources/app.properties)
-          JAR_NAME=$(grep -Po '(?<=^jar.name=).+' new-branch/src/main/resources/app.properties)
-          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
-          echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
-          echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
-          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
-          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
-          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
-          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
-          echo "The AWS bucket name is $AWS_BUCKET_NAME"
-          echo "The AWS path folder name is $AWS_PATH_FOLDER"
-          echo "The AWS region name is $AWS_REGION"
-          echo "The jar file name is $JAR_NAME"
 
       - name: Display current directory src
         run: |
