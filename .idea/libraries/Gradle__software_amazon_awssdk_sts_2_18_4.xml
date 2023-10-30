@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.awssdk:sts:2.18.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.awssdk" artifactId="sts" version="2.18.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/sts/2.18.4/335c940ef1bc78b2d514c5aaa6eb91f56a981e9/sts-2.18.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/sts/2.18.4/b2f20e4403feb2d05ccb85e97321268baf632b8f/sts-2.18.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-grpc-server-generator:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-grpc-server-generator" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-grpc-server-generator/4.3.0/2e7f3b0c26059f26e461a3fe4e9484272475ce7d/wire-grpc-server-generator-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-grpc-server-generator/4.3.0/d8a1dde17003005230a835472895c7f36b2c2f90/wire-grpc-server-generator-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

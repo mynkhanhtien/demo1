@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-cep:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-cep" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-cep/1.17.1/34360e679cdc7d5631c227dc0f59e8e292169f9b/flink-cep-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-cep/1.17.1/986a50c4b78d3ca3ed70bc13e870d16c63f8472e/flink-cep-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

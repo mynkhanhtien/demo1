@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-shaded-jackson:2.13.4-16.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-shaded-jackson" version="2.13.4-16.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-shaded-jackson/2.13.4-16.1/4e5fb57e10af9cd814258221c9f50c920e6c09/flink-shaded-jackson-2.13.4-16.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

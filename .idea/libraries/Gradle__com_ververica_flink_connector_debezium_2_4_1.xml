@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.ververica:flink-connector-debezium:2.4.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.ververica" artifactId="flink-connector-debezium" version="2.4.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ververica/flink-connector-debezium/2.4.1/405ef1fbe18e4ef5b6b05a815134a46b41bc565c/flink-connector-debezium-2.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.ververica/flink-connector-debezium/2.4.1/cf92d49e69a1bc7c8f4228b12b030a21a15d9102/flink-connector-debezium-2.4.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

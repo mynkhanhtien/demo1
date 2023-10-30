@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.debezium:debezium-connector-postgres:1.9.7.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.debezium" artifactId="debezium-connector-postgres" version="1.9.7.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.debezium/debezium-connector-postgres/1.9.7.Final/300ff0bbf795643e914b7c8a6d6ba812a8354d62/debezium-connector-postgres-1.9.7.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.debezium/debezium-connector-postgres/1.9.7.Final/b528b115882f3038eede3db118bc30b749a3c733/debezium-connector-postgres-1.9.7.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-java-generator:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-java-generator" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-java-generator/4.3.0/4e7002996ac1fa8ac81f818dd6bcb312686f327f/wire-java-generator-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-java-generator/4.3.0/db2ee0d7cc3f040c3cd1a005aa9725db68a1ecf8/wire-java-generator-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

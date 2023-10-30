@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-profiles:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-profiles" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-profiles/4.3.0/2aa5c1f61f2fbb37ee06d3dca38ab1d54749ca44/wire-profiles-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-profiles/4.3.0/152669e8b4b65b37a083699a0225304545278454/wire-profiles-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

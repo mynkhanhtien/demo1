@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.kafka:connect-runtime:3.2.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.kafka" artifactId="connect-runtime" version="3.2.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/connect-runtime/3.2.0/4a0198d8bbe2fe04de32958af51938fa9926b824/connect-runtime-3.2.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.kafka/connect-runtime/3.2.0/a0b8ccbd2e32d5d7ef8020aa0fec2e8ac031fa6e/connect-runtime-3.2.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

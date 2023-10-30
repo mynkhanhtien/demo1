@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.codehaus.janino:commons-compiler:3.0.11" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.codehaus.janino" artifactId="commons-compiler" version="3.0.11" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/commons-compiler/3.0.11/f2a6ec7fbc929c9fc87ff8bb486c0574951c5b09/commons-compiler-3.0.11.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.codehaus.janino/commons-compiler/3.0.11/40d28f1dd099610dde071bd8d03300ebeb08f2d/commons-compiler-3.0.11-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

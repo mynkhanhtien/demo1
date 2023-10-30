@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-file-sink-common:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-file-sink-common" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-file-sink-common/1.17.1/7bec20512431525c6136ade98ff0165426ec348a/flink-file-sink-common-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-file-sink-common/1.17.1/4a4fcba8a1e727f425a9f244b3cdf7be19cd6ac5/flink-file-sink-common-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

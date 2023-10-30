@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.glue:schema-registry-flink-serde:1.1.17" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.glue" artifactId="schema-registry-flink-serde" version="1.1.17" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-flink-serde/1.1.17/c7154a1e8a2b64c5e437d3fb1819c72c5480df48/schema-registry-flink-serde-1.1.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-flink-serde/1.1.17/d3d553954a4c2518b24dad688bf173ff5cfee4d8/schema-registry-flink-serde-1.1.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

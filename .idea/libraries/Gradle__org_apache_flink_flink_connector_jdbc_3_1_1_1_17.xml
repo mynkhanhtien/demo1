@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-connector-jdbc:3.1.1-1.17" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-connector-jdbc" version="3.1.1-1.17" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-connector-jdbc/3.1.1-1.17/7028a35de5d07587de8bee2624e4fd9560a2969f/flink-connector-jdbc-3.1.1-1.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-connector-jdbc/3.1.1-1.17/93a1b99552aa306e788afcc549146e5d1435a330/flink-connector-jdbc-3.1.1-1.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

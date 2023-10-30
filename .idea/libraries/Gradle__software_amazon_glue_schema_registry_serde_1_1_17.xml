@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.glue:schema-registry-serde:1.1.17" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.glue" artifactId="schema-registry-serde" version="1.1.17" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-serde/1.1.17/b0d8f4e2c441ce9f9bff264b9d6f830e90a4f9fb/schema-registry-serde-1.1.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-serde/1.1.17/6c731c9d6ec11c5e218cdc653888be350ba66368/schema-registry-serde-1.1.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

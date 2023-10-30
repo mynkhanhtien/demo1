@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-rpc-core:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-rpc-core" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-rpc-core/1.17.1/ccf88d09540c2827f2543289ab7accdedbeb2e43/flink-rpc-core-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-rpc-core/1.17.1/c517987c3828e19c49e48faa1d81fb51d2b363c1/flink-rpc-core-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
