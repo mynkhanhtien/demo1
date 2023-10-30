@@ -60,6 +60,8 @@ jobs:
         run: |
           pwd
           ls -la
+          cd resources
+          ls -la
 
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -70,6 +72,8 @@ jobs:
       - name: Display current directory src
         run: |
           pwd
+          ls -la
+          cd new-branch
           ls -la
 
 #      - name: Fetch branch and checkout/copy over only the config folder to current src
