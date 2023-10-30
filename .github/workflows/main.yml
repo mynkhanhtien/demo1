@@ -17,6 +17,8 @@ jobs:
         run: |
           # Extract the comment body
           COMMENT_BODY=$(jq -r .comment.body "${{ github.event_path }}")
+          echo "COMMENT_BODY=COMMENT_BODY" >> $GITHUB_ENV
+          echo "The COMMENT_BODY name is $COMMENT_BODY"
           
           # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
           if [[ $COMMENT_BODY =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
