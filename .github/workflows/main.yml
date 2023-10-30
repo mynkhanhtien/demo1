@@ -29,12 +29,15 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           # Extract the comment body
+          PR_TITLE=$(jq -r .pull_request.title "${{ github.event_path }}")
+          echo "PR_TITLE=PR_TITLE" >> $GITHUB_ENV
+          echo "The PR_TITLE name is $PR_TITLE"
           COMMENT_BODY=$(jq -r .comment.body "${{ github.event_path }}")
           echo "COMMENT_BODY=COMMENT_BODY" >> $GITHUB_ENV
           echo "The COMMENT_BODY name is $COMMENT_BODY"
           
           # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
-          if [[ $COMMENT_BODY =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
+          if [[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
             SOURCE_NAME="${BASH_REMATCH[2]}"
             CLIENT_NAME="${BASH_REMATCH[3]}"
             PROGRAM_NAME="${BASH_REMATCH[4]}"
