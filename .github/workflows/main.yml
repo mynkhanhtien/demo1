@@ -64,23 +64,22 @@ jobs:
           ls -la
           cd data-migration
           ls -la
-          
       - name: Set environment variable from app.properties
         run: |
           AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' new-branch/src/main/resources/app.properties)
           AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' new-branch/src/main/resources/app.properties)
           AWS_REGION=$(grep -Po '(?<=^aws.region=).+' new-branch/src/main/resources/app.properties)
           JAR_NAME=$(grep -Po '(?<=^jar.name=).+' new-branch/src/main/resources/app.properties)
-#          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' new-branch/src/main/resources/app.properties)
-#          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' new-branch/src/main/resources/app.properties)
-#          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' new-branch/src/main/resources/app.properties)
+          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' new-branch/src/main/resources/app.properties)
+          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' new-branch/src/main/resources/app.properties)
+          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' new-branch/src/main/resources/app.properties)
           echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
           echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
           echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
           echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
-#          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
-#          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
-#          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
           echo "The AWS bucket name is $AWS_BUCKET_NAME"
           echo "The AWS path folder name is $AWS_PATH_FOLDER"
           echo "The AWS region name is $AWS_REGION"
