@@ -69,8 +69,6 @@ jobs:
         run: |
           cd resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME
           ls -la
-          cat app.properties
-
       - name: Set environment variable from app.properties
         run: |
           AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' new-branch/src/main/resources/app.properties)
