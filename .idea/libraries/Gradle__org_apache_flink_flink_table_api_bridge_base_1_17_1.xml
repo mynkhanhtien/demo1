@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-table-api-bridge-base:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-table-api-bridge-base" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-table-api-bridge-base/1.17.1/b632e158c1d4e851f33c6669a8e383bd00987b89/flink-table-api-bridge-base-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-table-api-bridge-base/1.17.1/7687e83ec236bfb8b0eab177c1bf14058b01321b/flink-table-api-bridge-base-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

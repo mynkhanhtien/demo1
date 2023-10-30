@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-swift-generator:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-swift-generator" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-swift-generator/4.3.0/a1769bfbeeddff09bacbea852b9416677c490d3f/wire-swift-generator-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-swift-generator/4.3.0/47c418ffc86f074899a578a271ff283c8ff12aa7/wire-swift-generator-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.awssdk:json-utils:2.18.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.awssdk" artifactId="json-utils" version="2.18.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/json-utils/2.18.4/ca0376f42ba7e080c6aaedc106ff3550cbdf5bf7/json-utils-2.18.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/json-utils/2.18.4/961129c4f30ed127e7195d5411f8cd0d17cd3542/json-utils-2.18.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

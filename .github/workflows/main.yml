@@ -2,11 +2,23 @@
 # The workflow Creates static website using aws s3
 name: AWS example workflow
 on:
-  push
-env:
-  BUCKET_NAME : "mq-my-static-bucket"
-  AWS_REGION : "us-east-1"
-# permission can be added at job level or workflow level    
+  push:
+    branches:
+      - config/data-migration
+      - develop
+      - main
+      - master
+    paths:
+      - 'src/**/*'
+      - '.github/**/*'
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - config/data-migration
+      - develop
+      - main
+      - master
+# permission can be added at job level or workflow level
 permissions:
   id-token: write   # This is required for requesting the JWT
   contents: read    # This is required for actions/checkout
@@ -14,15 +26,153 @@ jobs:
   S3PackageUpload:
     runs-on: ubuntu-latest
     steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v4
+      - name: Conditional Job Execution
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Extract the comment body
+          PR_TITLE=$(jq -r .pull_request.title "${{ github.event_path }}")
+          echo "PR_TITLE=PR_TITLE" >> $GITHUB_ENV
+          echo "The PR_TITLE name is $PR_TITLE"
+
+          # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
+          if ! [[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
+            echo "The comment does not match the required format. Skipping the job."
+            exit 1
+          else
+            SOURCE_NAME="${BASH_REMATCH[2]}"
+            CLIENT_NAME="${BASH_REMATCH[3]}"
+            PROGRAM_NAME="${BASH_REMATCH[4]}"
+
+            echo "The comment matches the required format."
+            echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+            echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+            echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+            echo "The source name is $SOURCE_NAME"
+            echo "The client name is $CLIENT_NAME"
+            echo "The program name is $PROGRAM_NAME"
+          fi
+
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd resources
+          ls -la
+          cd data-migration
+          ls -la
+
+      - name: Read app.properties
+        run: |
+          cd resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME
+          ls -la
+          cat app.properties
+      - name: Set environment variable from app.properties
+        run: |
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          AWS_REGION=$(grep -Po '(?<=^aws.region=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          JAR_NAME=$(grep -Po '(?<=^jar.name=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/app.properties)
+          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
+          echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
+          echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
+          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+          echo "The AWS bucket name is $AWS_BUCKET_NAME"
+          echo "The AWS path folder name is $AWS_PATH_FOLDER"
+          echo "The AWS region name is $AWS_REGION"
+          echo "The jar file name is $JAR_NAME"
+
+      - name: Checkout source code
+        uses: actions/checkout@v3
+        with:
+          ref: new-branch
+          path: new-branch
+
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch
+          ls -la
+
+#      - name: Fetch branch and checkout/copy over only the config folder to current src
+#        run: |
+#          git fetch
+#          git checkout origin/config/data-migration --no-overlay -- resources/data-migration
+
+      - name: Copy app.properties from config to src
+        run: |
+          cp -f resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
+
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch
+          ls -la
+          cd src/main/resources/
+          ls -la
+          cat app.properties
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          architecture: x64
+          check-latest: false
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+          overwrite-settings: true
+          job-status: success
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x new-branch/gradlew
+
+      - name: Build with Gradle
+        run: |
+          cd new-branch
+          ./gradlew clean build
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch/build/libs
+          ls -la
+
+      - name: Rename JAR file
+        run: |
+          cd new-branch/build/libs
+          for jar_file in *.jar; do
+            if [[ $jar_file != *"original"* ]]; then
+              new_name=$JAR_NAME
+              mv "$jar_file" "$new_name.jar"
+            fi
+          done
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch/build/libs
+          ls -la
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: $AWS_REGION
       # Upload a file to AWS s3
-      - name:  Copy index.html to s3
+      - name:  Upload the jar file to AWS s3
         run: |
-          aws s3 cp ./README.md s3://${{ env.BUCKET_NAME }}/
+          aws s3 sync new-branch/build/libs s3://$AWS_BUCKET_NAME/$AWS_PATH_FOLDER/

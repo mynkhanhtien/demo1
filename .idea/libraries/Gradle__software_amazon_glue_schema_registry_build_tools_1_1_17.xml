@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.glue:schema-registry-build-tools:1.1.17" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.glue" artifactId="schema-registry-build-tools" version="1.1.17" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-build-tools/1.1.17/f629ebcb9b0c31c94427e6eed995d95d28a20e37/schema-registry-build-tools-1.1.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.glue/schema-registry-build-tools/1.1.17/7c032b279231e01622e10fdff956a54c71fb92b4/schema-registry-build-tools-1.1.17-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

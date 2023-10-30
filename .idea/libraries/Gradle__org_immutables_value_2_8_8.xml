@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.immutables:value:2.8.8" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.immutables" artifactId="value" version="2.8.8" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.immutables/value/2.8.8/d99fa1e04af5a1fda42fa9412d68eb7fe17a1071/value-2.8.8.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.immutables/value/2.8.8/7f961f4e4f4ebe2f2ad78738908b3ff649b69273/value-2.8.8-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

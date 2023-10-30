@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-compiler:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-compiler" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-compiler/4.3.0/ba9e78ba6a8e75c147242e61c9745d86928608e7/wire-compiler-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-compiler/4.3.0/b39e6ae6a2f8d7f92e05680be2c0550ccd4ea70b/wire-compiler-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

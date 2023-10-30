@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: software.amazon.awssdk:glue:2.18.4" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="software.amazon.awssdk" artifactId="glue" version="2.18.4" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/glue/2.18.4/94418796c3f3d0ede1734ec6a37cd30392e63db2/glue-2.18.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/software.amazon.awssdk/glue/2.18.4/88a23e3c762ccffb2b6e39bc86722b2e9721f674/glue-2.18.4-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

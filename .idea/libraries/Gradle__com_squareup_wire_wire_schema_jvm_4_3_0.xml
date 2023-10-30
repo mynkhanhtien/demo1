@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.squareup.wire:wire-schema-jvm:4.3.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.squareup.wire" artifactId="wire-schema-jvm" version="4.3.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-schema-jvm/4.3.0/11b23402487bdc94913ecd402899c4aabe67b54a/wire-schema-jvm-4.3.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-schema-jvm/4.3.0/f3e79f65b988357e74e9c2524a0f73ff7af10fb7/wire-schema-jvm-4.3.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

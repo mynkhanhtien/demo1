@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: io.debezium:debezium-core:1.9.7.Final" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="io.debezium" artifactId="debezium-core" version="1.9.7.Final" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.debezium/debezium-core/1.9.7.Final/38fad59f919d6c2cba14ee866236f89f5c763003/debezium-core-1.9.7.Final.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/io.debezium/debezium-core/1.9.7.Final/ef63be5e664600cc638f8094961ed60e8643d84/debezium-core-1.9.7.Final-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

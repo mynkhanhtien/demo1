@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-avro:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-avro" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-avro/1.17.1/a0c7f7f8c9ecb63eef54b53a1b4da3076c3b3270/flink-avro-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-avro/1.17.1/dfe921c5244b9ca22eaae418eefdb43a06a4cf04/flink-avro-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

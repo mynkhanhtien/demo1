@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.flink:flink-scala_2.12:1.17.1" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.apache.flink" artifactId="flink-scala_2.12" version="1.17.1" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-scala_2.12/1.17.1/49fe514b0c18598b8fdf36fa049c05baf6971063/flink-scala_2.12-1.17.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.apache.flink/flink-scala_2.12/1.17.1/553112a7cfa15e3825430086ba3a9d02dae11331/flink-scala_2.12-1.17.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
