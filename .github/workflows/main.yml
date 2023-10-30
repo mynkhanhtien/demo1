@@ -61,7 +61,7 @@ jobs:
 
       - name: Copy app.properties from config to src
         run: |
-          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
+          cp -Rf resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
 
       - name: Read app.properties
         run: |
@@ -108,13 +108,6 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew clean build
 
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: arn:aws:iam::206271891137:role/github-role
-          role-session-name: samplerolesession
-          aws-region: us-east-1
-
       - name: Rename JAR file
         run: |
           cd ./build/libs
@@ -124,6 +117,13 @@ jobs:
               mv "$jar_file" "$new_name"
             fi
           done
+
+      - name: configure aws credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          role-to-assume: arn:aws:iam::206271891137:role/github-role
+          role-session-name: samplerolesession
+          aws-region: us-east-1
       # Upload a file to AWS s3
       - name:  Upload the jar file to AWS s3
         run: |
