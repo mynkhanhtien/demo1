@@ -46,9 +46,9 @@ jobs:
             echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
             echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
             echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
-            echo "The PR_TITLE name is $SOURCE_NAME"
-            echo "The PR_TITLE name is $CLIENT_NAME"
-            echo "The PR_TITLE name is $PROGRAM_NAME"
+            echo "The source name is $SOURCE_NAME"
+            echo "The client name is $CLIENT_NAME"
+            echo "The program name is $PROGRAM_NAME"
           fi
 
       - name: Checkout Repository
@@ -59,6 +59,10 @@ jobs:
           git fetch
           git checkout origin/config/data-migration --no-overlay -- resources/data-migration
 
+      - name: Copy app.properties from config to src
+        run: |
+          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
+
       - name: Read app.properties
         run: |
           cat src/main/resources/app.properties
@@ -68,9 +72,6 @@ jobs:
           AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' src/main/resources/app.properties)
           AWS_REGION=$(grep -Po '(?<=^aws.region=).+' src/main/resources/app.properties)
           JAR_NAME=$(grep -Po '(?<=^jar.name=).+' src/main/resources/app.properties)
-          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' src/main/resources/app.properties)
-          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' src/main/resources/app.properties)
-          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' src/main/resources/app.properties)
           echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
           echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
           echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
@@ -82,18 +83,11 @@ jobs:
           echo "The AWS path folder name is $AWS_PATH_FOLDER"
           echo "The AWS region name is $AWS_REGION"
           echo "The jar file name is $JAR_NAME"
-          echo "The source name is $SOURCE_NAME"
-          echo "The client name is $CLIENT_NAME"
-          echo "The program name is $PROGRAM_NAME"
 
       - name: Display current directory src
         run: |
           pwd
           ls -la
-
-      - name: Copy app.properties from config to src
-        run: |
-          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
 
       - name: Set up Java
         uses: actions/setup-java@v2
