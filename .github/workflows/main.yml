@@ -56,7 +56,7 @@ jobs:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
-            - name: Extract properties from app.properties
+      - name: Extract properties from app.properties
         id: extract-properties
         run: |
           AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
