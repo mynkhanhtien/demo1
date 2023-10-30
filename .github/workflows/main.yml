@@ -81,7 +81,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
-          aws-region: $AWS_REGION
+          aws-region: us-east-1
 
       - name: Rename JAR file
         run: |
