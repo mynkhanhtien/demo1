@@ -21,6 +21,35 @@ jobs:
           git fetch
           git checkout origin/config/data-migration --no-overlay -- resources/data-migration
 
+      - name: Conditional Job Execution
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Extract the comment body
+          COMMENT_BODY=$(jq -r .comment.body "${{ github.event_path }}")
+          
+          # Check if the comment matches the required formats
+          if [[ $COMMENT_BODY =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
+            SOURCE_NAME="${BASH_REMATCH[2]}"
+            CLIENT_NAME="${BASH_REMATCH[3]}"
+            PROGRAM_NAME="${BASH_REMATCH[4]}"
+          
+            echo "The comment matches the required format."
+            echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+            echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+            echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+          
+            # Add your job steps here
+            - name: Run Your Job
+              run: |
+                echo "Running your job based on the comment format."
+                # Add your job steps here
+          
+          else
+            echo "The comment does not match the required format. Skipping the job."
+            exit 0
+          fi
+
       - name: Read app.properties
         run: |
           cat src/main/resources/app.properties
