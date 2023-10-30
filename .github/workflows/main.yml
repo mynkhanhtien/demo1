@@ -85,7 +85,7 @@ jobs:
 
       - name: Copy app.properties from config to src
         run: |
-          cp -Rf resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
+          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
 
       - name: Display current directory src
         run: |
