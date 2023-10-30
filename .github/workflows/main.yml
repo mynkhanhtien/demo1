@@ -48,10 +48,6 @@ jobs:
             echo "The PR_TITLE name is $PROGRAM_NAME"
           
             # Add your job steps here
-            - name: Run Your Job
-              run: |
-                echo "Running your job based on the comment format."
-          
             - name: Checkout Repository
               uses: actions/checkout@v3
       
