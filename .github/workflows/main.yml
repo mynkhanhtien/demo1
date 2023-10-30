@@ -43,85 +43,83 @@ jobs:
             - name: Run Your Job
               run: |
                 echo "Running your job based on the comment format."
-                # Add your job steps here
+            - name: Read app.properties
+              run: |
+                cat src/main/resources/app.properties
+            - name: Set environment variable from app.properties
+              run: |
+                AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
+                AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' src/main/resources/app.properties)
+                AWS_REGION=$(grep -Po '(?<=^aws.region=).+' src/main/resources/app.properties)
+                JAR_NAME=$(grep -Po '(?<=^jar.name=).+' src/main/resources/app.properties)
+                SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' src/main/resources/app.properties)
+                CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' src/main/resources/app.properties)
+                PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' src/main/resources/app.properties)
+                echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
+                echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
+                echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
+                echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+                echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+                echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+                echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+                echo "The AWS bucket name is $AWS_BUCKET_NAME"
+                echo "The AWS path folder name is $AWS_PATH_FOLDER"
+                echo "The AWS region name is $AWS_REGION"
+                echo "The jar file name is $JAR_NAME"
+                echo "The source name is $SOURCE_NAME"
+                echo "The client name is $CLIENT_NAME"
+                echo "The program name is $PROGRAM_NAME"
+      
+            - name: Display current directory src
+              run: |
+                pwd
+                ls -la
+      
+            - name: Copy app.properties from config to src
+              run: |
+                cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
+      
+            - name: Set up Java
+              uses: actions/setup-java@v2
+              with:
+                java-version: 11
+                distribution: 'adopt'
+                architecture: x64
+                check-latest: false
+                server-id: github
+                server-username: GITHUB_ACTOR
+                server-password: GITHUB_TOKEN
+                overwrite-settings: true
+                job-status: success
+      
+            - name: Grant execute permission for gradlew
+              run: chmod +x gradlew
+      
+            - name: Build with Gradle
+              run: ./gradlew clean build
+      
+            - name: configure aws credentials
+              uses: aws-actions/configure-aws-credentials@v3
+              with:
+                role-to-assume: arn:aws:iam::206271891137:role/github-role
+                role-session-name: samplerolesession
+                aws-region: us-east-1
+      
+            - name: Rename JAR file
+              run: |
+                cd ./build/libs
+                for jar_file in *.jar; do
+                  if [[ $jar_file != *"original"* ]]; then
+                    new_name=$JAR_NAME
+                    mv "$jar_file" "$new_name"
+                  fi
+                done
+            # Upload a file to AWS s3
+            - name:  Upload the jar file to AWS s3
+              run: |
+                aws s3 sync ./build/libs s3://$AWS_BUCKET_NAME/$AWS_PATH_FOLDER/
           
           else
             echo "The comment does not match the required format. Skipping the job."
             exit 0
           fi
-
-      - name: Read app.properties
-        run: |
-          cat src/main/resources/app.properties
-      - name: Set environment variable from app.properties
-        run: |
-          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
-          AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' src/main/resources/app.properties)
-          AWS_REGION=$(grep -Po '(?<=^aws.region=).+' src/main/resources/app.properties)
-          JAR_NAME=$(grep -Po '(?<=^jar.name=).+' src/main/resources/app.properties)
-          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' src/main/resources/app.properties)
-          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' src/main/resources/app.properties)
-          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' src/main/resources/app.properties)
-          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
-          echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
-          echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
-          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
-          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
-          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
-          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
-          echo "The AWS bucket name is $AWS_BUCKET_NAME"
-          echo "The AWS path folder name is $AWS_PATH_FOLDER"
-          echo "The AWS region name is $AWS_REGION"
-          echo "The jar file name is $JAR_NAME"
-          echo "The source name is $SOURCE_NAME"
-          echo "The client name is $CLIENT_NAME"
-          echo "The program name is $PROGRAM_NAME"
-
-      - name: Display current directory src
-        run: |
-          pwd
-          ls -la
-
-      - name: Copy app.properties from config to src
-        run: |
-          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
-
-      - name: Set up Java
-        uses: actions/setup-java@v2
-        with:
-          java-version: 11
-          distribution: 'adopt'
-          architecture: x64
-          check-latest: false
-          server-id: github
-          server-username: GITHUB_ACTOR
-          server-password: GITHUB_TOKEN
-          overwrite-settings: true
-          job-status: success
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
-
-      - name: Build with Gradle
-        run: ./gradlew clean build
-
-      - name: configure aws credentials
-        uses: aws-actions/configure-aws-credentials@v3
-        with:
-          role-to-assume: arn:aws:iam::206271891137:role/github-role
-          role-session-name: samplerolesession
-          aws-region: us-east-1
-
-      - name: Rename JAR file
-        run: |
-          cd ./build/libs
-          for jar_file in *.jar; do
-            if [[ $jar_file != *"original"* ]]; then
-              new_name=$JAR_NAME
-              mv "$jar_file" "$new_name"
-            fi
-          done
-      # Upload a file to AWS s3
-      - name:  Upload the jar file to AWS s3
-        run: |
-          aws s3 sync ./build/libs s3://$AWS_BUCKET_NAME/$AWS_PATH_FOLDER/
