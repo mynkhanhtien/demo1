@@ -34,7 +34,7 @@ jobs:
           echo "The PR_TITLE name is $PR_TITLE"
           
           # Check if the comment matches the required formats Data-Migration: <source_name>/<client_name>/<program_name>
-          if ![[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
+          if ! [[ $PR_TITLE =~ (Data-Migration|Member-Onboarding):\ ([^/]+)/([^/]+)/([^/]+) ]]; then
             echo "The comment does not match the required format. Skipping the job."
             exit 1
           else
