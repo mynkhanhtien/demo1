@@ -13,14 +13,6 @@ jobs:
   S3PackageUpload:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v3
-
-      - name: Fetch branch and checkout/copy over only the config folder to current src
-        run: |
-          git fetch
-          git checkout origin/config/data-migration --no-overlay -- resources/data-migration
-
       - name: Conditional Job Execution
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,6 +35,14 @@ jobs:
             - name: Run Your Job
               run: |
                 echo "Running your job based on the comment format."
+            - name: Checkout Repository
+              uses: actions/checkout@v3
+      
+            - name: Fetch branch and checkout/copy over only the config folder to current src
+              run: |
+                git fetch
+                git checkout origin/config/data-migration --no-overlay -- resources/data-migration
+
             - name: Read app.properties
               run: |
                 cat src/main/resources/app.properties
