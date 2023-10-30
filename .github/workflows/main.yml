@@ -119,11 +119,9 @@ jobs:
           ls -la
           cd new-branch
           ls -la
-
-      - name: Display current directory src
-        run: |
-          pwd
+          cd src/main/resources/
           ls -la
+          cat app.properties
 
       - name: Set up Java
         uses: actions/setup-java@v2
