@@ -1,0 +1,10 @@
+{
+  "namespace": "member.avro",
+  "type": "record",
+  "name": "member",
+  "fields": [
+    {"name": "id", "type": "string"},
+    {"name": "name", "type": "string"}
+  ]
+}
+

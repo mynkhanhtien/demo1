@@ -14,14 +14,69 @@ jobs:
   S3PackageUpload:
     runs-on: ubuntu-latest
     steps:
-      - name: Git clone the repository
-        uses: actions/checkout@v4
+          - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Fetch branch and checkout/copy over only the config folder to current src
+        run: |
+          git fetch
+          git checkout origin/config/data-migration --no-overlay -- resources/data-migration
+
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+
+      - name: Copy app.properties from config to src
+        run: |
+          cp -R resources/data-migration/rc1/client1/program1/* src/main/resources/
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: 11
+          distribution: 'adopt'
+          architecture: x64
+          check-latest: false
+          server-id: github
+          server-username: GITHUB_ACTOR
+          server-password: GITHUB_TOKEN
+          overwrite-settings: true
+          job-status: success
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build with Gradle
+        run: ./gradlew clean build
+
       - name: configure aws credentials
         uses: aws-actions/configure-aws-credentials@v3
         with:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
           aws-region: ${{ env.AWS_REGION }}
+            - name: Extract properties from app.properties
+        id: extract-properties
+        run: |
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
+          AWS_REGION=$(grep -Po '(?<=^region=).+' src/main/resources/app.properties)
+          JAR_FILE_NAME=$(grep -Po '(?<=^jar_file_name=).+' src/main/resources/app.properties)
+          FLINK_APP_NAME=$(grep -Po '(?<=^flink_app_name=).+' src/main/resources/app.properties)
+          echo "::set-output name=bucket::$AWS_BUCKET_NAME"
+          echo "::set-output name=region::$AWS_REGION"
+          echo "::set-output name=jar_file_name::$JAR_FILE_NAME"
+          echo "::set-output name=flink_app_name::$FLINK_APP_NAME"
+
+      - name: Rename JAR file
+        run: |
+          cd ./build/libs
+          for jar_file in *.jar; do
+            if [[ $jar_file != *"original"* ]]; then
+              new_name="${{ steps.extract-properties.outputs.jar_file_name }}"
+              mv "$$jar_file" "$new_name"
+            fi
+          done
       # Upload a file to AWS s3
       - name:  Copy index.html to s3
         run: |
