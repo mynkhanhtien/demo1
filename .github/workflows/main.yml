@@ -62,6 +62,8 @@ jobs:
           ls -la
           cd resources
           ls -la
+          cd data-migration
+          ls -la
 
       - name: Checkout source code
         uses: actions/checkout@v3
@@ -84,6 +86,13 @@ jobs:
       - name: Copy app.properties from config to src
         run: |
           cp -Rf resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* new-branch/src/main/resources/
+
+      - name: Display current directory src
+        run: |
+          pwd
+          ls -la
+          cd new-branch
+          ls -la
 
       - name: Read app.properties
         run: |

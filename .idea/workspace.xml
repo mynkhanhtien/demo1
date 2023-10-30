@@ -7,11 +7,6 @@
     <list default="true" id="48e66936-c3ae-4a80-ade5-eb5d454622e1" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.github/workflows/main.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/main.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data-migration/default/app.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data-migration/default/query.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data-migration/rc1/client1/program1/app.properties" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data-migration/rc1/client1/program1/query.sql" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/data-migration/rc1/client1/program2/.gitkeep" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1698665118994</updated>
-      <workItem from="1698665119992" duration="119000" />
+      <workItem from="1698665119992" duration="286000" />
     </task>
     <servers />
   </component>
