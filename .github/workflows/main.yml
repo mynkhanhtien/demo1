@@ -159,7 +159,7 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
-          aws-region: us-east-1
+          aws-region: $AWS_REGION
       # Upload a file to AWS s3
       - name:  Upload the jar file to AWS s3
         run: |
