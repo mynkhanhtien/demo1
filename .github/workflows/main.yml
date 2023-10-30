@@ -21,6 +21,33 @@ jobs:
           git fetch
           git checkout origin/config/data-migration --no-overlay -- resources/data-migration
 
+      - name: Read app.properties
+        run: |
+          cat src/main/resources/app.properties
+      - name: Set environment variable from app.properties
+        run: |
+          AWS_BUCKET_NAME=$(grep -Po '(?<=^aws.s3.bucket.name=).+' src/main/resources/app.properties)
+          AWS_PATH_FOLDER=$(grep -Po '(?<=^aws.s3.folder.path=).+' src/main/resources/app.properties)
+          AWS_REGION=$(grep -Po '(?<=^aws.region=).+' src/main/resources/app.properties)
+          JAR_NAME=$(grep -Po '(?<=^jar.name=).+' src/main/resources/app.properties)
+          SOURCE_NAME=$(grep -Po '(?<=^source.name=).+' src/main/resources/app.properties)
+          CLIENT_NAME=$(grep -Po '(?<=^source.client.name=).+' src/main/resources/app.properties)
+          PROGRAM_NAME=$(grep -Po '(?<=^source.client.program.name=).+' src/main/resources/app.properties)
+          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
+          echo "AWS_PATH_FOLDER=$AWS_PATH_FOLDER" >> $GITHUB_ENV
+          echo "AWS_REGION=$AWS_REGION" >> $GITHUB_ENV
+          echo "JAR_NAME=$JAR_NAME" >> $GITHUB_ENV
+          echo "SOURCE_NAME=$SOURCE_NAME" >> $GITHUB_ENV
+          echo "CLIENT_NAME=$CLIENT_NAME" >> $GITHUB_ENV
+          echo "PROGRAM_NAME=$PROGRAM_NAME" >> $GITHUB_ENV
+          echo "The AWS bucket name is $AWS_BUCKET_NAME"
+          echo "The AWS path folder name is $AWS_PATH_FOLDER"
+          echo "The AWS region name is $AWS_REGION"
+          echo "The jar file name is $JAR_NAME"
+          echo "The source name is $SOURCE_NAME"
+          echo "The client name is $CLIENT_NAME"
+          echo "The program name is $PROGRAM_NAME"
+
       - name: Display current directory src
         run: |
           pwd
@@ -28,7 +55,7 @@ jobs:
 
       - name: Copy app.properties from config to src
         run: |
-          cp -R resources/data-migration/rc1/client1/program1/* src/main/resources/
+          cp -R resources/data-migration/$SOURCE_NAME/$CLIENT_NAME/$PROGRAM_NAME/* src/main/resources/
 
       - name: Set up Java
         uses: actions/setup-java@v2
@@ -54,40 +81,18 @@ jobs:
         with:
           role-to-assume: arn:aws:iam::206271891137:role/github-role
           role-session-name: samplerolesession
-          aws-region: ${{ env.AWS_REGION }}
-      - name: Read app.properties
-        run: |
-          cat src/main/resources/app.properties
-      - name: Set environment variable from app.properties
-        run: |
-          AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
-          echo "AWS_BUCKET_NAME=$AWS_BUCKET_NAME" >> $GITHUB_ENV
-      - name: Use AWS_BUCKET_NAME
-        run: |
-          echo "The AWS bucket name is $AWS_BUCKET_NAME"
-          # Use the AWS_BUCKET_NAME environment variable in your commands or scripts
-      - name: Extract properties from app.properties
-        id: extract-properties
-        run: |
-          AWS_BUCKET_NAME=$(grep -Po '(?<=^bucket=).+' src/main/resources/app.properties)
-          AWS_REGION=$(grep -Po '(?<=^region=).+' src/main/resources/app.properties)
-          JAR_FILE_NAME=$(grep -Po '(?<=^jar_file_name=).+' src/main/resources/app.properties)
-          FLINK_APP_NAME=$(grep -Po '(?<=^flink_app_name=).+' src/main/resources/app.properties)
-          echo "::set-output name=bucket::$AWS_BUCKET_NAME"
-          echo "::set-output name=region::$AWS_REGION"
-          echo "::set-output name=jar_file_name::$JAR_FILE_NAME"
-          echo "::set-output name=flink_app_name::$FLINK_APP_NAME"
+          aws-region: $AWS_REGION
 
       - name: Rename JAR file
         run: |
           cd ./build/libs
           for jar_file in *.jar; do
             if [[ $jar_file != *"original"* ]]; then
-              new_name="${{ steps.extract-properties.outputs.jar_file_name }}"
+              new_name=$JAR_NAME
               mv "$jar_file" "$new_name"
             fi
           done
       # Upload a file to AWS s3
-      - name:  Copy index.html to s3
+      - name:  Upload the jar file to AWS s3
         run: |
           aws s3 cp ./README.md s3://$AWS_BUCKET_NAME/
